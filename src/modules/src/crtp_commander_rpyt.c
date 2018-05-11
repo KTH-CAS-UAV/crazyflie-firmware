@@ -76,7 +76,8 @@ static bool carefreeResetFront;             // Reset what is front in carefree m
 
 static bool thrustLocked = true;
 static bool altHoldMode = false;
-static bool posHoldMode = false;
+static bool altSetMode = true;
+static bool posHoldMode = true;
 static bool posSetMode = false;
 
 /**
@@ -139,8 +140,11 @@ void crtpCommanderRpytDecodeSetpoint(setpoint_t *setpoint, CRTPPacket *pk)
   if (altHoldMode) {
     setpoint->thrust = 0;
     setpoint->mode.z = modeVelocity;
-
     setpoint->velocity.z = ((float) rawThrust - 32767.f) / 32767.f;
+  } else if (altSetMode && (setpoint->thrust != 0)) {
+    setpoint->thrust = 0;
+    setpoint->mode.z = modeAbs;
+    setpoint->position.z = (float)values->thrust/MAX_THRUST;
   } else {
     setpoint->mode.z = modeDisable;
   }
@@ -215,6 +219,7 @@ PARAM_GROUP_START(flightmode)
 PARAM_ADD(PARAM_UINT8, althold, &altHoldMode)
 PARAM_ADD(PARAM_UINT8, poshold, &posHoldMode)
 PARAM_ADD(PARAM_UINT8, posSet, &posSetMode)
+PARAM_ADD(PARAM_UINT8, altSet, &altSetMode)
 PARAM_ADD(PARAM_UINT8, yawMode, &yawMode)
 PARAM_ADD(PARAM_UINT8, yawRst, &carefreeResetFront)
 PARAM_ADD(PARAM_UINT8, stabModeRoll, &stabilizationModeRoll)
