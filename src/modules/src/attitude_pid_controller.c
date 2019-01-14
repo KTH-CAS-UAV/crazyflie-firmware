@@ -196,6 +196,7 @@ PARAM_ADD(PARAM_FLOAT, pitch_kd, &pidPitch.kd)
 PARAM_ADD(PARAM_FLOAT, yaw_kp, &pidYaw.kp)
 PARAM_ADD(PARAM_FLOAT, yaw_ki, &pidYaw.ki)
 PARAM_ADD(PARAM_FLOAT, yaw_kd, &pidYaw.kd)
+PARAM_ADD(PARAM_FLOAT, yaw_limit, &pidYaw.outputLimit)
 PARAM_GROUP_STOP(pid_attitude)
 
 PARAM_GROUP_START(pid_rate)

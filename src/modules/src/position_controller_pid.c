@@ -64,11 +64,11 @@ struct this_s {
 };
 
 // Maximum roll/pitch angle permited
-static float rpLimit  = 20;
+static float rpLimit  = 12;
 static float rpLimitOverhead = 1.10f;
 // Velocity maximums
-static float xyVelMax = 1.0f;
-static float zVelMax  = 1.0f;
+static float xyVelMax = 0.5f;
+static float zVelMax  = 0.5f;
 static float velMaxOverhead = 1.10f;
 static const float thrustScale = 1000.0f;
 
