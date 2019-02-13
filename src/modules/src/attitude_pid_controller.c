@@ -90,6 +90,8 @@ void attitudeControllerInit(const float updateDt)
   pidSetIntegralLimit(&pidPitch, PID_PITCH_INTEGRATION_LIMIT);
   pidSetIntegralLimit(&pidYaw,   PID_YAW_INTEGRATION_LIMIT);
 
+  pidYaw.outputLimit = PID_YAW_OUTPUT_LIMIT;
+
   isInit = true;
 }
 
